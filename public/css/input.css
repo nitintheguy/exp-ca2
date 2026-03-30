@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+@theme {
+  --color-gov-blue: #003366;
+  --color-gov-saffron: #FF9933;
+  --color-gov-green: #128807;
+}

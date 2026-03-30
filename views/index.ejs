@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nivaran | Public Grievance Portal</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-[#f8fafc] min-h-screen font-sans antialiased overflow-x-hidden relative">
+
+    <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-gov-blue/5 rounded-full blur-[120px] -z-10"></div>
+    <div class="absolute bottom-[10%] right-[-5%] w-[400px] h-[400px] bg-gov-saffron/10 rounded-full blur-[100px] -z-10"></div>
+
+    <%- include('partials/nav') %>
+
+    <main class="relative pt-48 pb-20 px-6 flex flex-col items-center justify-center">
+        <div class="max-w-4xl mx-auto text-center">
+            <span class="inline-block px-4 py-1.5 mb-6 text-[10px] font-bold tracking-[0.2em] uppercase text-gov-green bg-gov-green/10 rounded-full border border-gov-green/20">
+                Official Government of India Portal
+            </span>
+
+            <h1 class="text-6xl md:text-7xl font-black text-slate-900 mb-6 leading-[1.1] tracking-tight">
+                Grievance Redressal, <br>
+                <span class="text-gov-blue italic">Simplified.</span>
+            </h1>
+
+            <p class="text-xl text-slate-600 mb-12 max-w-2xl mx-auto leading-relaxed">
+                Empowering citizens with a transparent, digital-first approach to resolve public issues with state and central departments.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="/login" class="w-full sm:w-auto bg-slate-900 text-white px-10 py-4 rounded-2xl font-bold shadow-2xl shadow-slate-900/20 hover:bg-gov-blue transition-all active:scale-95 text-center">
+                    Sign In to Portal
+                </a>
+                <a href="/signup" class="w-full sm:w-auto bg-white/50 backdrop-blur-md border border-slate-200 text-slate-700 px-10 py-4 rounded-2xl font-bold hover:bg-white transition-all active:scale-95 text-center">
+                    Create New Account
+                </a>
+            </div>
+
+            <div class="mt-20 pt-10 border-t border-slate-200/60 flex flex-wrap justify-center gap-12 opacity-60 grayscale hover:grayscale-0 transition-all">
+                <div class="text-center">
+                    <p class="text-2xl font-bold text-slate-800">24/7</p>
+                    <p class="text-xs uppercase tracking-widest font-medium">Monitoring</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-2xl font-bold text-slate-800">100%</p>
+                    <p class="text-xs uppercase tracking-widest font-medium">Digital</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-2xl font-bold text-slate-800">Direct</p>
+                    <p class="text-xs uppercase tracking-widest font-medium">Resolution</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
