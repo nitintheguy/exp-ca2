@@ -13,7 +13,7 @@
                     Your <span class="text-gov-blue italic">Grievances.</span>
                 </h1>
             </div>
-            <a href="/new-grievance" class="flex items-center gap-4 group mb-2">
+            <a href="/grievance/new" class="flex items-center gap-4 group mb-2">
                 <div class="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center group-hover:bg-slate-900 group-hover:border-slate-900 transition-all duration-300">
                     <svg class="w-4 h-4 text-slate-400 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 6v12m6-6H6"/>
@@ -31,7 +31,7 @@
 
                     <div class="w-1/4">
                         <span class="font-mono text-xs font-bold text-slate-400 group-hover:text-gov-blue transition-colors">
-                            #<%= g.id %>
+                        #<%= g._id.toString().slice(-6).toUpperCase() %>
                         </span>
                     </div>
 
@@ -68,7 +68,7 @@
                         <% } %>
                     </div>
 
-                </div>
+                </a>
                 <% }) %>
 
             <% } else { %>

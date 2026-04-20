@@ -4,6 +4,14 @@ const MemoryStore = require('memorystore')(session);
 const app = express();
 const PORT = 3000;
 
+
+const mongoose = require('mongoose');
+require('dotenv').config();
+
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.log(err));
+
 // 1. Settings & Static Files
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
@@ -47,10 +55,6 @@ app.get('/about', (req, res) => {
     res.render('about', { currentPage: 'about' });
 });
 
-app.get('/track-status', (req, res) => {
-    // res.locals.user (set above) handles the Guest vs Auth toggle in the EJS
-    res.render('track-status', { currentPage: 'track-status' });
-});
 
 // 6. DEV LOGIN (Use this to force the "NM" state)
 app.get('/dev-login', (req, res) => {

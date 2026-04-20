@@ -1,34 +1,39 @@
 const express = require('express');
 const router = express.Router();
-const fs = require('fs');
-const path = require('path');
-
-const USERS_FILE = path.join(__dirname, '../data/users.json');
-const getUsers = () => JSON.parse(fs.readFileSync(USERS_FILE, 'utf-8'));
-const saveUsers = (users) => fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2));
+const Grievance = require('../models/Grievance');
 
 const requireAuth = (req, res, next) => {
     if (!req.session.user) return res.redirect('/login');
     next();
 };
 
-router.get('/profile', requireAuth, (req, res) => {
-    const users = getUsers();
-    const user = users.find(u => u.id === req.session.user.id);
-    res.render('profile', { currentPage: 'profile', user, grievances: user.grievances || [] });
+// PROFILE — show all grievances of logged-in user
+router.get('/profile', requireAuth, async (req, res) => {
+    const grievances = await Grievance.find({ submittedBy: req.session.user.id });
+    res.render('profile', {
+        currentPage: 'profile',
+        user: req.session.user,
+        grievances
+    });
 });
 
+
+router.get('/track-status', requireAuth, async (req, res) => {
+    console.log('Session user id:', req.session.user.id); // ADD THIS
+    const grievances = await Grievance.find({ submittedBy: req.session.user.id });
+    console.log('Grievances found:', grievances.length); // ADD THIS
+    res.render('track-status', { currentPage: 'track', grievances, user: req.session.user });
+});
+// NEW GRIEVANCE — form
 router.get('/grievance/new', requireAuth, (req, res) => {
     res.render('grievance/new', { currentPage: 'grievance', error: null });
 });
 
-router.post('/grievance/new', requireAuth, (req, res) => {
+// NEW GRIEVANCE — submit
+router.post('/grievance/new', requireAuth, async (req, res) => {
     const { title, category, department, location, state, district, description, issueDate, priority } = req.body;
-    const users = getUsers();
-    const userIndex = users.findIndex(u => u.id === req.session.user.id);
 
-    const grievance = {
-        id: Date.now().toString(),
+    const grievance = await Grievance.create({
         title,
         category,
         department,
@@ -38,23 +43,22 @@ router.post('/grievance/new', requireAuth, (req, res) => {
         description,
         issueDate: issueDate || '',
         priority: priority || 'normal',
-        status: 'pending',
-        createdAt: new Date().toISOString(),
-        updates: []
-    };
+        submittedBy: req.session.user.id
+    });
 
-    users[userIndex].grievances.push(grievance);
-    saveUsers(users);
-
-    res.redirect(`/grievance/${grievance.id}`);
+    res.redirect(`/grievance/${grievance._id}`);
 });
 
-router.get('/grievance/:id', requireAuth, (req, res) => {
-    const users = getUsers();
-    const user = users.find(u => u.id === req.session.user.id);
-    const grievance = user.grievances.find(g => g.id === req.params.id);
-    if (!grievance) return res.redirect('/profile');
-    res.render('grievance/show', { currentPage: 'grievance', grievance, user });
+// SHOW GRIEVANCE
+router.get('/grievance/:id', requireAuth, async (req, res) => {
+    const grievance = await Grievance.findById(req.params.id);
+    if (!grievance || grievance.submittedBy !== req.session.user.id)
+        return res.redirect('/profile');
+    res.render('grievance/show', {
+        currentPage: 'grievance',
+        grievance,
+        user: req.session.user
+    });
 });
 
 module.exports = router;
