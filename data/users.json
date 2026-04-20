@@ -1,0 +1,73 @@
+[
+  {
+    "id": "1775451379646",
+    "firstName": "Nitin",
+    "lastName": "Mishra",
+    "email": "nitinmishra85666@gmail.com",
+    "mobile": "9838085666",
+    "passwordHash": "$2b$10$8dt9YVYfwtzfLdJiogU5Be96YYlenctWoV.JT4Ye5LxXsQgmZrqPO",
+    "role": "citizen",
+    "grievances": [],
+    "createdAt": "2026-04-06T04:56:19.728Z"
+  },
+  {
+    "id": "1775452148742",
+    "firstName": "Nitin",
+    "lastName": "Mishra",
+    "email": "nitinmishra23@lpu.in",
+    "mobile": "9889667453",
+    "passwordHash": "$2b$10$7df/OP41HqicpgqAIbK8jeflq1ih7nmmkX5vLFij3rqHhbizKPy3C",
+    "role": "citizen",
+    "grievances": [],
+    "createdAt": "2026-04-06T05:09:08.808Z"
+  },
+  {
+    "id": "1775452209087",
+    "firstName": "Nitin",
+    "lastName": "Mishra",
+    "email": "jcr@atmaranjan.com",
+    "mobile": "9838085666",
+    "passwordHash": "$2b$10$FGUJhPtBuBkBbrBsh.letOzsWrpuBXXaa5wQNSojyMrBrXeq/D2Yi",
+    "role": "citizen",
+    "grievances": [],
+    "createdAt": "2026-04-06T05:10:09.154Z"
+  },
+  {
+    "id": "1775452498068",
+    "firstName": "Nitin",
+    "lastName": "Mishra",
+    "email": "jcr@at.com",
+    "mobile": "9838085666",
+    "passwordHash": "$2b$10$8Mnl.EvNd8ZzuVvJNXp/4OHdSWBebaV08nL15xO4d8wrM0Qd30c6O",
+    "role": "citizen",
+    "grievances": [],
+    "createdAt": "2026-04-06T05:14:58.132Z"
+  },
+  {
+    "id": "1775452780505",
+    "firstName": "Nitin",
+    "lastName": "Mishra",
+    "email": "nitinmishra@gmail.com",
+    "mobile": "9838085666",
+    "passwordHash": "$2b$10$ksiiK4k4GiouD6wanlp.g.j0nqSlDf6xGHiAdvaTeCQjuAfUha3Cm",
+    "role": "citizen",
+    "grievances": [
+      {
+        "id": "1775453041455",
+        "title": "water not coming",
+        "category": "Water Supply",
+        "department": "Municipal Corporation",
+        "location": "rpk",
+        "state": "Punjab",
+        "district": "Jalandhar",
+        "description": "bhgvyygukjnbkjn",
+        "issueDate": "2026-04-06",
+        "priority": "normal",
+        "status": "pending",
+        "createdAt": "2026-04-06T05:24:01.455Z",
+        "updates": []
+      }
+    ],
+    "createdAt": "2026-04-06T05:19:40.568Z"
+  }
+]

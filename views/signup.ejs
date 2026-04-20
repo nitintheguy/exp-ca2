@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nivaran | Create Account</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-[#f8fafc] min-h-screen font-sans antialiased">
+
+    <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-gov-blue/5 rounded-full blur-[120px] -z-10"></div>
+    <div class="absolute bottom-[10%] right-[-5%] w-[400px] h-[400px] bg-gov-saffron/10 rounded-full blur-[100px] -z-10"></div>
+
+    <%- include('partials/nav') %>
+
+    <main style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 8rem 1.5rem 4rem;">
+        <div style="width: 100%; max-width: 460px;">
+
+            <div style="text-align: center; margin-bottom: 2.5rem;">
+                <span class="inline-block px-4 py-1.5 text-[10px] font-bold tracking-[0.2em] uppercase text-gov-blue bg-gov-blue/10 rounded-full border border-gov-blue/10" style="margin-bottom: 1.25rem;">
+                    New Registration
+                </span>
+                <h1 class="text-slate-900 font-black tracking-tighter" style="font-size: 2.5rem; line-height: 1.1; margin-bottom: 0.5rem;">
+                    Join Nivaran.
+                </h1>
+                <p class="text-slate-500" style="font-size: 0.95rem;">Create your account to file and track grievances.</p>
+            </div>
+
+            <div style="background: white; border-radius: 1.5rem; padding: 2.5rem; border: 1px solid #e2e8f0;">
+                <form action="/signup" method="POST">
+
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1.25rem;">
+                        <div style="flex: 1;">
+                            <label class="text-[10px] font-bold uppercase text-slate-400" style="letter-spacing: 0.2em; display: block; margin-bottom: 0.5rem;">First Name</label>
+                            <input type="text" name="firstName" placeholder="Rahul" required
+                                style="width: 100%; padding: 0.875rem 1rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; font-size: 0.9rem; background: #f8fafc; outline: none; font-family: inherit;">
+                        </div>
+                        <div style="flex: 1;">
+                            <label class="text-[10px] font-bold uppercase text-slate-400" style="letter-spacing: 0.2em; display: block; margin-bottom: 0.5rem;">Last Name</label>
+                            <input type="text" name="lastName" placeholder="Sharma" required
+                                style="width: 100%; padding: 0.875rem 1rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; font-size: 0.9rem; background: #f8fafc; outline: none; font-family: inherit;">
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 1.25rem;">
+                        <label class="text-[10px] font-bold uppercase text-slate-400" style="letter-spacing: 0.2em; display: block; margin-bottom: 0.5rem;">Email Address</label>
+                        <input type="email" name="email" placeholder="rahul@example.com" required
+                            style="width: 100%; padding: 0.875rem 1rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; font-size: 0.9rem; background: #f8fafc; outline: none; font-family: inherit;">
+                    </div>
+
+                    <div style="margin-bottom: 1.25rem;">
+                        <label class="text-[10px] font-bold uppercase text-slate-400" style="letter-spacing: 0.2em; display: block; margin-bottom: 0.5rem;">Mobile Number</label>
+                        <input type="tel" name="mobile" placeholder="+91 98765 43210" required
+                            style="width: 100%; padding: 0.875rem 1rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; font-size: 0.9rem; background: #f8fafc; outline: none; font-family: inherit;">
+                    </div>
+
+                    <div style="margin-bottom: 1.75rem;">
+                        <label class="text-[10px] font-bold uppercase text-slate-400" style="letter-spacing: 0.2em; display: block; margin-bottom: 0.5rem;">Password</label>
+                        <input type="password" name="password" placeholder="Min. 8 characters" required
+                            style="width: 100%; padding: 0.875rem 1rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; font-size: 0.9rem; background: #f8fafc; outline: none; font-family: inherit;">
+                    </div>
+
+                    <button type="submit"
+                        style="width: 100%; padding: 1rem; background: #003366; color: white; border-radius: 0.875rem; font-weight: 700; font-size: 0.9rem; border: none; cursor: pointer; font-family: inherit; letter-spacing: 0.02em;">
+                        Create My Account
+                    </button>
+                </form>
+            </div>
+
+            <p class="text-slate-500" style="text-align: center; margin-top: 1.5rem; font-size: 0.85rem;">
+                Already have an account?
+                <a href="/login" class="font-bold text-gov-blue" style="margin-left: 4px;">Sign in →</a>
+            </p>
+
+        </div>
+    </main>
+</body>
+</html>

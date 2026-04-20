@@ -53,6 +53,98 @@
             </div>
         </div>
     </main>
+<section style="padding: 5rem 0;">
+    <div class="max-w-6xl mx-auto px-6">
+        <div class="flex items-center justify-center gap-3" style="margin-bottom: 3rem;">
+            <span class="inline-block px-4 py-1.5 text-[10px] font-bold tracking-[0.2em] uppercase text-gov-green bg-gov-green/10 rounded-full border border-gov-green/20">
+                Live System Status
+            </span>
+            <span class="text-[9px] font-bold uppercase text-slate-400" style="letter-spacing: 0.25em;">Updated in real-time</span>
+        </div>
 
+        <div class="flex flex-row items-start justify-center">
+            <div class="flex-1" style="padding: 2rem 2.5rem 2rem 0; border-right: 1px solid #e2e8f0; text-align: center;">
+                <p class="text-[9px] font-bold uppercase text-slate-400" style="letter-spacing: 0.25em; margin-bottom: 0.75rem;">Total Received</p>
+                <p class="text-5xl font-black tracking-tighter text-slate-900 counter" data-target="12450">0</p>
+            </div>
+            <div class="flex-1" style="padding: 2rem 2.5rem; border-right: 1px solid #e2e8f0; text-align: center;">
+                <p class="text-[9px] font-bold uppercase text-slate-400" style="letter-spacing: 0.25em; margin-bottom: 0.75rem;">Active Cases</p>
+                <p class="text-5xl font-black tracking-tighter text-gov-saffron counter" data-target="842">0</p>
+            </div>
+            <div class="flex-1" style="padding: 2rem 2.5rem; border-right: 1px solid #e2e8f0; text-align: center;">
+                <p class="text-[9px] font-bold uppercase text-slate-400" style="letter-spacing: 0.25em; margin-bottom: 0.75rem;">Resolved Today</p>
+                <p class="text-5xl font-black tracking-tighter text-gov-green counter" data-target="156">0</p>
+            </div>
+            <div class="flex-1" style="padding: 2rem 0 2rem 2.5rem; text-align: center;">
+                <p class="text-[9px] font-bold uppercase text-slate-400" style="letter-spacing: 0.25em; margin-bottom: 0.75rem;">Avg. Resolution</p>
+                <div class="flex items-baseline gap-2 justify-center">
+                    <span class="text-5xl font-black tracking-tighter text-slate-900 counter" data-target="24">0</span>
+                    <span class="text-xl font-bold text-slate-400">H</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- THE PROTOCOL SECTION -->
+<section style="padding: 6rem 1.5rem;">
+    <div class="max-w-6xl mx-auto flex flex-row items-start" style="gap: 4rem;">
+        <div style="width: 220px; flex-shrink: 0;">
+            <span class="inline-block px-4 py-1.5 text-[10px] font-bold tracking-[0.2em] uppercase text-gov-blue bg-gov-blue/10 rounded-full border border-gov-blue/10" style="margin-bottom: 1rem;">
+                The Protocol
+            </span>
+            <p class="text-sm text-slate-400 leading-relaxed" style="margin-top: 1rem;">
+                Standardized operating procedures for citizen-to-state grievance management.
+            </p>
+        </div>
+        <div class="flex flex-row flex-1" style="gap: 3rem;">
+            <div class="flex-1" style="border-top: 2px solid #003366; padding-top: 1.5rem;">
+                <p class="text-[9px] font-bold uppercase text-gov-blue" style="letter-spacing: 0.25em; margin-bottom: 0.75rem;">01</p>
+                <h4 class="text-xl font-black tracking-tight text-slate-900" style="margin-bottom: 0.5rem;">Identity.</h4>
+                <p class="text-[13px] text-slate-500 leading-relaxed">Secure KYC-linked authentication ensuring all grievances are fully verifiable.</p>
+            </div>
+            <div class="flex-1" style="border-top: 2px solid #FF9933; padding-top: 1.5rem;">
+                <p class="text-[9px] font-bold uppercase text-gov-saffron" style="letter-spacing: 0.25em; margin-bottom: 0.75rem;">02</p>
+                <h4 class="text-xl font-black tracking-tight text-slate-900" style="margin-bottom: 0.5rem;">Routing.</h4>
+                <p class="text-[13px] text-slate-500 leading-relaxed">Automated classification and direct assignment to the Nodal Officer.</p>
+            </div>
+            <div class="flex-1" style="border-top: 2px solid #128807; padding-top: 1.5rem;">
+                <p class="text-[9px] font-bold uppercase text-gov-green" style="letter-spacing: 0.25em; margin-bottom: 0.75rem;">03</p>
+                <h4 class="text-xl font-black tracking-tight text-slate-900" style="margin-bottom: 0.5rem;">Resolution.</h4>
+                <p class="text-[13px] text-slate-500 leading-relaxed">Transparent feedback loop where cases only close upon citizen satisfaction.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<<%- include('partials/footer') %>
+
+<script>
+    const startCount = (el) => {
+        const target = +el.getAttribute('data-target');
+        const count = +el.innerText;
+        const speed = 100; // Lower is faster
+        const inc = target / speed;
+
+        if (count < target) {
+            el.innerText = Math.ceil(count + inc);
+            setTimeout(() => startCount(el), 15);
+        } else {
+            el.innerText = target.toLocaleString(); // Adds commas like 12,450
+        }
+    };
+
+    const observerOptions = { threshold: 0.5 };
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                startCount(entry.target);
+                observer.unobserve(entry.target); // Run only once
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.counter').forEach(counter => observer.observe(counter));
+</script>
 </body>
 </html>

@@ -1,0 +1,172 @@
+<%- include('partials/header') %>
+<%- include('partials/nav') %>
+
+<main class="relative min-h-screen">
+    <% if (locals.user) { %>
+
+    <div class="max-w-4xl mx-auto px-6 pt-48 pb-20">
+
+        <header class="flex flex-row items-end justify-between border-b-[3px] border-slate-900 pb-8 mb-10">
+            <div>
+                <span class="text-[10px] font-black tracking-[0.4em] uppercase text-gov-blue">Citizen Command Center</span>
+                <h1 class="text-6xl md:text-7xl font-[1000] text-slate-900 tracking-tighter leading-none mt-4">
+                    Your <span class="text-gov-blue italic">Grievances.</span>
+                </h1>
+            </div>
+            <a href="/new-grievance" class="flex items-center gap-4 group mb-2">
+                <div class="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center group-hover:bg-slate-900 group-hover:border-slate-900 transition-all duration-300">
+                    <svg class="w-4 h-4 text-slate-400 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 6v12m6-6H6"/>
+                    </svg>
+                </div>
+                <span class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 group-hover:text-slate-900 transition-colors">New Case</span>
+            </a>
+        </header>
+
+        <div class="flex flex-col">
+            <% if (locals.grievances && grievances.length > 0) { %>
+
+                <% grievances.forEach(function(g) { %>
+                <div class="group flex flex-row items-center py-6 border-b border-slate-100 hover:bg-slate-50/50 transition-all px-4 rounded-2xl">
+
+                    <div class="w-1/4">
+                        <span class="font-mono text-xs font-bold text-slate-400 group-hover:text-gov-blue transition-colors">
+                            #<%= g.id %>
+                        </span>
+                    </div>
+
+                    <div class="w-2/4 text-left">
+                        <h4 class="text-xl font-black text-slate-900 tracking-tight leading-tight group-hover:translate-x-2 transition-transform duration-300">
+                            <%= g.title %>
+                        </h4>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-2">
+                            <%= g.department %>
+                        </p>
+                    </div>
+
+                    <div class="w-1/4 flex justify-end">
+                        <% if (g.status === 'under_review') { %>
+                            <span class="flex items-center gap-1.5 px-3 py-1.5 bg-gov-saffron/5 text-gov-saffron rounded-full border border-gov-saffron/10 text-[9px] font-black uppercase tracking-[0.2em]">
+                                <span class="w-1.5 h-1.5 rounded-full bg-gov-saffron inline-block"></span>
+                                Under Review
+                            </span>
+                        <% } else if (g.status === 'resolved') { %>
+                            <span class="flex items-center gap-1.5 px-3 py-1.5 bg-gov-green/5 text-gov-green rounded-full border border-gov-green/10 text-[9px] font-black uppercase tracking-[0.2em]">
+                                <span class="w-1.5 h-1.5 rounded-full bg-gov-green inline-block"></span>
+                                Resolved
+                            </span>
+                        <% } else if (g.status === 'escalated') { %>
+                            <span class="flex items-center gap-1.5 px-3 py-1.5 bg-red-50 text-red-500 rounded-full border border-red-100 text-[9px] font-black uppercase tracking-[0.2em]">
+                                <span class="w-1.5 h-1.5 rounded-full bg-red-400 inline-block"></span>
+                                Escalated
+                            </span>
+                        <% } else { %>
+                            <span class="flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 text-slate-400 rounded-full border border-slate-100 text-[9px] font-black uppercase tracking-[0.2em]">
+                                <span class="w-1.5 h-1.5 rounded-full bg-slate-300 inline-block"></span>
+                                Pending
+                            </span>
+                        <% } %>
+                    </div>
+
+                </div>
+                <% }) %>
+
+            <% } else { %>
+                <div class="flex flex-col items-center py-24 opacity-30">
+                    <div class="w-px h-12 bg-slate-900 mb-4"></div>
+                    <p class="text-[9px] font-black uppercase tracking-[0.4em]">No grievances filed yet</p>
+                </div>
+            <% } %>
+        </div>
+
+        <div class="mt-20 flex flex-col items-center opacity-10">
+            <div class="w-px h-10 bg-slate-900 mb-4"></div>
+            <p class="text-[9px] font-black uppercase tracking-[0.5em]">Records End</p>
+        </div>
+
+    </div>
+
+    <% } else { %>
+
+        <div class="max-w-4xl mx-auto px-6 pt-52 pb-20 flex flex-col items-center text-center">
+            
+            <div id="auth-notice" class="w-full flex flex-row items-center justify-between px-6 py-4 mb-12 bg-gov-green/5 border border-gov-green/20 rounded-2xl">
+                <div class="flex flex-row items-center gap-4 text-left">
+                    <span class="inline-block px-3 py-1 text-[9px] font-black tracking-[0.1em] uppercase text-gov-green bg-gov-green/10 rounded-full border border-gov-green/10">
+                        Official Notice
+                    </span>
+                    <p class="text-[11px] font-bold text-slate-600 tracking-tight">
+                        Please <a href="/login" class="text-gov-green underline hover:text-green-800 transition-colors">sign in</a> to view your active grievance ledger. Unregistered users can only view system status.
+                    </p>
+                </div>
+                <button onclick="document.getElementById('auth-notice').style.display='none'" class="text-gov-green/40 hover:text-gov-green transition-colors pl-4">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+
+            <span class="inline-block px-4 py-1.5 mb-6 text-[10px] font-bold tracking-[0.2em] uppercase text-gov-blue bg-gov-blue/5 rounded-full border border-gov-blue/10">
+                System Monitoring
+            </span>
+
+            <h1 class="text-6xl md:text-7xl font-black text-slate-900 mb-8 leading-[1.1] tracking-tighter">
+                Transparency <br> 
+                <span class="text-gov-blue italic">by Default.</span>
+            </h1>
+
+            <p class="text-xl text-slate-500 mb-12 max-w-2xl mx-auto leading-relaxed font-medium">
+                Nivaran provides a 100% transparent audit trail for your complaints. Tracking ensures your voice isn't lost in bureaucracy.
+            </p>
+        </div>
+
+        <section style="padding: 6rem 1.5rem; border-top: 1px solid #f1f5f9; background: white;">
+            <div class="max-w-6xl mx-auto flex flex-row items-start" style="gap: 4rem;">
+                <div style="width: 220px; flex-shrink: 0;">
+                    <span class="inline-block px-4 py-1.5 text-[10px] font-bold tracking-[0.2em] uppercase text-slate-400 bg-slate-50 rounded-full border border-slate-100" style="margin-bottom: 1rem;">
+                        The Advantage
+                    </span>
+                    <p class="text-sm text-slate-400 leading-relaxed text-left">
+                        Direct visibility into the administrative resolution lifecycle of your submissions.
+                    </p>
+                </div>
+                <div class="flex flex-row flex-1 text-left" style="gap: 3rem;">
+                    <div class="flex-1" style="border-top: 2px solid #003366; padding-top: 1.5rem;">
+                        <p class="text-[9px] font-bold uppercase text-gov-blue" style="letter-spacing: 0.25em; margin-bottom: 0.75rem;">01</p>
+                        <h4 class="text-xl font-black tracking-tight text-slate-900" style="margin-bottom: 0.5rem;">Real-time Milestones.</h4>
+                        <p class="text-[13px] text-slate-500 leading-relaxed">See exactly when a nodal officer is assigned and when action is initiated on your specific ticket.</p>
+                    </div>
+                    <div class="flex-1" style="border-top: 2px solid #128807; padding-top: 1.5rem;">
+                        <p class="text-[9px] font-bold uppercase text-gov-green" style="letter-spacing: 0.25em; margin-bottom: 0.75rem;">02</p>
+                        <h4 class="text-xl font-black tracking-tight text-slate-900" style="margin-bottom: 0.5rem;">Direct Accountability.</h4>
+                        <p class="text-[13px] text-slate-500 leading-relaxed">Departments are timed on resolution speed. Tracking holds them responsible for every hour of delay.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section style="padding: 8rem 1.5rem;">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-20 items-center text-left">
+                    <div>
+                        <h2 class="text-4xl font-black tracking-tighter text-slate-900 mb-6 leading-none">The Ledger.</h2>
+                        <p class="text-lg text-slate-500 leading-relaxed font-medium">
+                            The Nivaran digital ledger is cryptographically secured to ensure that grievance records cannot be altered or deleted by any department.
+                        </p>
+                    </div>
+                    <div class="flex flex-row gap-12 border-l border-slate-200 pl-12">
+                        <div>
+                            <p class="text-3xl font-black text-gov-blue tracking-tighter">Live</p>
+                            <p class="text-[9px] font-bold uppercase text-slate-400 tracking-widest mt-2">Update Stream</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-black text-gov-blue tracking-tighter">Secure</p>
+                            <p class="text-[9px] font-bold uppercase text-slate-400 tracking-widest mt-2">End-to-End</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <% } %>
+</main>
+
+<%- include('partials/footer') %>

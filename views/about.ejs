@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Nivaran</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-[#f8fafc] min-h-screen font-sans antialiased overflow-x-hidden relative">
+
+    <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-gov-blue/5 rounded-full blur-[120px] -z-10"></div>
+    <div class="absolute bottom-[10%] right-[-5%] w-[400px] h-[400px] bg-gov-saffron/10 rounded-full blur-[100px] -z-10"></div>
+
+    <%- include('partials/nav') %>
+
+    <main class="relative pt-52 pb-20 px-6 flex flex-col items-center justify-center">
+        <div class="max-w-4xl mx-auto text-center">
+            <span class="inline-block px-4 py-1.5 mb-6 text-[10px] font-bold tracking-[0.2em] uppercase text-gov-blue bg-gov-blue/5 rounded-full border border-gov-blue/10">
+                Our Mandate
+            </span>
+
+            <h1 class="text-6xl md:text-7xl font-black text-slate-900 mb-8 leading-[1.1] tracking-tighter">
+                Bridging the <br> 
+                <span class="text-gov-blue italic">Public-State</span> Gap.
+            </h1>
+
+            <p class="text-xl text-slate-500 mb-12 max-w-2xl mx-auto leading-relaxed font-medium">
+                Nivaran is a high-performance digital infrastructure designed to ensure that every citizen's voice reaches the correct administrative desk without friction or delay.
+            </p>
+        </div>
+    </main>
+
+    <section style="padding: 6rem 1.5rem; border-top: 1px solid #f1f5f9; background: white;">
+        <div class="max-w-6xl mx-auto flex flex-row items-start" style="gap: 4rem;">
+            <div style="width: 220px; flex-shrink: 0;">
+                <span class="inline-block px-4 py-1.5 text-[10px] font-bold tracking-[0.2em] uppercase text-slate-400 bg-slate-50 rounded-full border border-slate-100" style="margin-bottom: 1rem;">
+                    Core Pillars
+                </span>
+                <p class="text-sm text-slate-400 leading-relaxed" style="margin-top: 1rem;">
+                    The three functional requirements of every administrative action within our portal.
+                </p>
+            </div>
+            
+            <div class="flex flex-row flex-1" style="gap: 3rem;">
+                <div class="flex-1" style="border-top: 2px solid #003366; padding-top: 1.5rem;">
+                    <p class="text-[9px] font-bold uppercase text-gov-blue" style="letter-spacing: 0.25em; margin-bottom: 0.75rem;">01</p>
+                    <h4 class="text-xl font-black tracking-tight text-slate-900" style="margin-bottom: 0.5rem;">Accountability.</h4>
+                    <p class="text-[13px] text-slate-500 leading-relaxed">Every grievance is timestamped and assigned to a nodal officer, creating a permanent paper trail.</p>
+                </div>
+                <div class="flex-1" style="border-top: 2px solid #FF9933; padding-top: 1.5rem;">
+                    <p class="text-[9px] font-bold uppercase text-gov-saffron" style="letter-spacing: 0.25em; margin-bottom: 0.75rem;">02</p>
+                    <h4 class="text-xl font-black tracking-tight text-slate-900" style="margin-bottom: 0.5rem;">Transparency.</h4>
+                    <p class="text-[13px] text-slate-500 leading-relaxed">Citizens track live status updates as cases move through departments to final resolution.</p>
+                </div>
+                <div class="flex-1" style="border-top: 2px solid #128807; padding-top: 1.5rem;">
+                    <p class="text-[9px] font-bold uppercase text-gov-green" style="letter-spacing: 0.25em; margin-bottom: 0.75rem;">03</p>
+                    <h4 class="text-xl font-black tracking-tight text-slate-900" style="margin-bottom: 0.5rem;">Efficiency.</h4>
+                    <p class="text-[13px] text-slate-500 leading-relaxed">Automated routing algorithms bypass bureaucratic bottlenecks to reach decision-makers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="padding: 8rem 1.5rem;">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+                <div>
+                    <h2 class="text-4xl font-black tracking-tighter text-slate-900 mb-6 leading-none">The Custodian.</h2>
+                    <p class="text-lg text-slate-500 leading-relaxed font-medium">
+                        Managed by the Department of Administrative Reforms and Public Grievances, Nivaran serves as the central node for the National Redressal Framework.
+                    </p>
+                </div>
+                <div class="flex flex-row gap-12 border-l border-slate-200 pl-12">
+                    <div>
+                        <p class="text-3xl font-black text-gov-blue">28</p>
+                        <p class="text-[9px] font-bold uppercase text-slate-400 tracking-widest mt-2">States Integrated</p>
+                    </div>
+                    <div>
+                        <p class="text-3xl font-black text-gov-blue">750+</p>
+                        <p class="text-[9px] font-bold uppercase text-slate-400 tracking-widest mt-2">Departments</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <%- include('partials/footer') %>
+
+</body>
+</html>

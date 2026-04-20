@@ -1,0 +1,63 @@
+<footer style="background: white; border-top: 1px solid #f1f5f9; padding: 4rem 1.5rem 2.5rem;">
+    <div class="max-w-6xl mx-auto">
+        <div class="flex flex-row items-start" style="gap: 4rem; margin-bottom: 4rem;">
+            <div style="flex-shrink: 0;">
+                <h2 class="text-2xl font-black tracking-tighter text-slate-900" style="margin-bottom: 0.5rem;">NIVARAN</h2>
+                <p class="text-[9px] font-bold uppercase text-slate-400" style="letter-spacing: 0.2em; line-height: 1.8;">
+                    National Informatics Centre<br>Government of India
+                </p>
+            </div>
+            <div class="flex flex-row flex-1 justify-end" style="gap: 4rem;">
+                <div class="flex flex-col" style="gap: 0.75rem;">
+                    <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest" style="margin-bottom: 0.5rem;">Navigation</p>
+                    <a href="/" class="text-xs font-bold text-slate-600 hover:text-gov-blue transition-colors">Home</a>
+                    <a href="/about" class="text-xs font-bold text-slate-600 hover:text-gov-blue transition-colors">About</a>
+                </div>
+                <div class="flex flex-col" style="gap: 0.75rem;">
+                    <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest" style="margin-bottom: 0.5rem;">Legal</p>
+                    <a href="#" class="text-xs font-bold text-slate-600 hover:text-gov-blue transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-xs font-bold text-slate-600 hover:text-gov-blue transition-colors">Terms of Use</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-row items-center justify-between" style="padding-top: 1.5rem; border-top: 1px solid #f1f5f9;">
+            <p class="text-[9px] font-bold text-slate-400 uppercase" style="letter-spacing: 0.3em;">© 2026 National Informatics Centre</p>
+            <div class="flex items-center gap-6">
+                <span class="flex items-center gap-2 text-[9px] font-bold uppercase text-gov-green" style="letter-spacing: 0.2em;">
+                    <span style="width: 6px; height: 6px; border-radius: 50%; background: #128807; display: inline-block;"></span>
+                    Systems Operational
+                </span>
+                <span class="text-[9px] font-bold text-slate-400 uppercase" style="letter-spacing: 0.2em;">v.4.2.0-STABLE</span>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    const startCount = (el) => {
+        const target = +el.getAttribute('data-target');
+        const count = +el.innerText;
+        const speed = 100;
+        const inc = target / speed;
+
+        if (count < target) {
+            el.innerText = Math.ceil(count + inc);
+            setTimeout(() => startCount(el), 15);
+        } else {
+            el.innerText = target.toLocaleString();
+        }
+    };
+
+    const observerOptions = { threshold: 0.5 };
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                startCount(entry.target);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.counter').forEach(counter => observer.observe(counter));
+</script>

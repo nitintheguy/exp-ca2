@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nivaran | Grievance</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-[#f8fafc] min-h-screen font-sans antialiased">
+
+    <%- include('../partials/nav') %>
+
+    <main style="max-width: 860px; margin: 0 auto; padding: 8rem 1.5rem 4rem;">
+
+        <a href="/profile" style="display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: #94a3b8; text-decoration: none; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 2rem;">
+            ← Back to Dashboard
+        </a>
+
+        <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+
+            <!-- LEFT -->
+            <div style="flex: 2;">
+
+                <%
+                    const statusColors = {
+                        'pending':     { bg: '#fff7ed', color: '#c2410c', border: '#fed7aa' },
+                        'in-progress': { bg: '#eff6ff', color: '#1d4ed8', border: '#bfdbfe' },
+                        'resolved':    { bg: '#f0fdf4', color: '#15803d', border: '#bbf7d0' },
+                        'closed':      { bg: '#f8fafc', color: '#64748b', border: '#e2e8f0' }
+                    };
+                    const sc = statusColors[grievance.status] || statusColors['pending'];
+                %>
+
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem;">
+                    <span style="padding: 6px 16px; background: <%- sc.bg %>; color: <%- sc.color %>; border: 1px solid <%- sc.border %>; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;">
+                        <%= grievance.status %>
+                    </span>
+                    <span style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: #94a3b8; letter-spacing: 0.15em;">
+                        ID: #<%= grievance.id %>
+                    </span>
+                </div>
+
+                <h1 style="font-size: 1.75rem; font-weight: 900; letter-spacing: -0.03em; color: #0f172a; line-height: 1.15; margin-bottom: 1.5rem;">
+                    <%= grievance.title %>
+                </h1>
+
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
+                    <span style="padding: 4px 12px; background: #f1f5f9; border-radius: 999px; font-size: 10px; font-weight: 700; color: #64748b; letter-spacing: 0.1em; text-transform: uppercase;"><%= grievance.category %></span>
+                    <span style="padding: 4px 12px; background: #f1f5f9; border-radius: 999px; font-size: 10px; font-weight: 700; color: #64748b; letter-spacing: 0.1em; text-transform: uppercase;"><%= grievance.department %></span>
+                    <% if (grievance.location) { %>
+                        <span style="padding: 4px 12px; background: #f1f5f9; border-radius: 999px; font-size: 10px; font-weight: 700; color: #64748b; letter-spacing: 0.1em; text-transform: uppercase;"><%= grievance.location %></span>
+                    <% } %>
+                </div>
+
+                <div style="background: white; border-radius: 1rem; border: 1px solid #e2e8f0; padding: 1.5rem; margin-bottom: 1.5rem;">
+                    <p style="font-size: 9px; font-weight: 700; text-transform: uppercase; color: #94a3b8; letter-spacing: 0.2em; margin-bottom: 0.75rem;">Description</p>
+                    <p style="font-size: 0.9rem; color: #475569; line-height: 1.75;"><%= grievance.description %></p>
+                </div>
+
+                <!-- Timeline -->
+                <div style="background: white; border-radius: 1rem; border: 1px solid #e2e8f0; padding: 1.5rem;">
+                    <p style="font-size: 9px; font-weight: 700; text-transform: uppercase; color: #94a3b8; letter-spacing: 0.2em; margin-bottom: 1.25rem;">Activity Timeline</p>
+
+                    <div style="display: flex; gap: 1rem; align-items: flex-start; padding-bottom: 1.25rem; border-bottom: 1px solid #f1f5f9;">
+                        <div style="width: 32px; height: 32px; border-radius: 50%; background: #003366; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            <span style="color: white; font-size: 12px; font-weight: 700;">✓</span>
+                        </div>
+                        <div>
+                            <p style="font-size: 0.85rem; font-weight: 700; color: #0f172a; margin-bottom: 2px;">Grievance Filed</p>
+                            <p style="font-size: 11px; color: #94a3b8;">
+                                <%= new Date(grievance.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }) %>
+                            </p>
+                        </div>
+                    </div>
+
+                    <% if (grievance.updates && grievance.updates.length > 0) { %>
+                        <% grievance.updates.forEach(function(update, i) { %>
+                            <% var isLast = i === grievance.updates.length - 1; %>
+                            <div style="display: flex; gap: 1rem; align-items: flex-start; padding: 1.25rem 0; border-bottom: <%= isLast ? 'none' : '1px solid #f1f5f9' %>;">
+                                <div style="width: 32px; height: 32px; border-radius: 50%; background: #f1f5f9; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                    <span style="color: #64748b; font-size: 11px; font-weight: 700;">↑</span>
+                                </div>
+                                <div>
+                                    <p style="font-size: 0.85rem; font-weight: 700; color: #0f172a; margin-bottom: 4px;"><%= update.message %></p>
+                                    <% if (update.statusChange) { %>
+                                        <span style="display: inline-block; margin-bottom: 4px; padding: 2px 8px; background: #eff6ff; color: #1d4ed8; border-radius: 999px; font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;">
+                                            Status → <%= update.statusChange %>
+                                        </span>
+                                    <% } %>
+                                    <p style="font-size: 11px; color: #94a3b8;">
+                                        <%= new Date(update.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }) %>
+                                    </p>
+                                </div>
+                            </div>
+                        <% }); %>
+                    <% } else { %>
+                        <div style="padding: 1.5rem 0; text-align: center;">
+                            <p style="font-size: 0.85rem; color: #94a3b8;">No updates yet. Your grievance is being reviewed.</p>
+                        </div>
+                    <% } %>
+                </div>
+
+            </div>
+
+            <!-- RIGHT SIDEBAR -->
+            <div style="flex: 1; position: sticky; top: 8rem; display: flex; flex-direction: column; gap: 1rem;">
+
+                <div style="background: white; border-radius: 1rem; border: 1px solid #e2e8f0; padding: 1.25rem;">
+                    <p style="font-size: 9px; font-weight: 700; text-transform: uppercase; color: #94a3b8; letter-spacing: 0.2em; margin-bottom: 1rem;">Filed By</p>
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                        <div style="width: 36px; height: 36px; border-radius: 50%; background: #003366; color: white; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0;">
+                            <%= user.firstName[0].toUpperCase() %><%= user.lastName[0].toUpperCase() %>
+                        </div>
+                        <div>
+                            <p style="font-size: 0.85rem; font-weight: 700; color: #0f172a;"><%= user.firstName %> <%= user.lastName %></p>
+                            <p style="font-size: 11px; color: #94a3b8;"><%= user.email %></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: white; border-radius: 1rem; border: 1px solid #e2e8f0; padding: 1.25rem;">
+                    <p style="font-size: 9px; font-weight: 700; text-transform: uppercase; color: #94a3b8; letter-spacing: 0.2em; margin-bottom: 1rem;">Details</p>
+                    <div style="display: flex; flex-direction: column; gap: 0.875rem;">
+
+                        <div>
+                            <p style="font-size: 9px; font-weight: 700; text-transform: uppercase; color: #94a3b8; letter-spacing: 0.15em; margin-bottom: 2px;">Filed On</p>
+                            <p style="font-size: 0.8rem; font-weight: 700; color: #334155;">
+                                <%= new Date(grievance.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }) %>
+                            </p>
+                        </div>
+
+                        <div style="border-top: 1px solid #f1f5f9; padding-top: 0.875rem;">
+                            <p style="font-size: 9px; font-weight: 700; text-transform: uppercase; color: #94a3b8; letter-spacing: 0.15em; margin-bottom: 2px;">Category</p>
+                            <p style="font-size: 0.8rem; font-weight: 700; color: #334155;"><%= grievance.category %></p>
+                        </div>
+
+                        <div style="border-top: 1px solid #f1f5f9; padding-top: 0.875rem;">
+                            <p style="font-size: 9px; font-weight: 700; text-transform: uppercase; color: #94a3b8; letter-spacing: 0.15em; margin-bottom: 2px;">Department</p>
+                            <p style="font-size: 0.8rem; font-weight: 700; color: #334155;"><%= grievance.department %></p>
+                        </div>
+
+                        <% if (grievance.location) { %>
+                        <div style="border-top: 1px solid #f1f5f9; padding-top: 0.875rem;">
+                            <p style="font-size: 9px; font-weight: 700; text-transform: uppercase; color: #94a3b8; letter-spacing: 0.15em; margin-bottom: 2px;">Location</p>
+                            <p style="font-size: 0.8rem; font-weight: 700; color: #334155;"><%= grievance.location %></p>
+                        </div>
+                        <% } %>
+
+                        <div style="border-top: 1px solid #f1f5f9; padding-top: 0.875rem;">
+                            <p style="font-size: 9px; font-weight: 700; text-transform: uppercase; color: #94a3b8; letter-spacing: 0.15em; margin-bottom: 2px;">Grievance ID</p>
+                            <p style="font-size: 0.8rem; font-weight: 700; color: #334155; word-break: break-all;">#<%= grievance.id %></p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <a href="/profile" style="display: block; padding: 0.875rem; text-align: center; border: 1px solid #e2e8f0; border-radius: 0.875rem; font-size: 11px; font-weight: 700; color: #94a3b8; text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; background: white;">
+                    ← Back to Dashboard
+                </a>
+
+            </div>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nivaran | File a Grievance</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-[#f8fafc] min-h-screen font-sans antialiased">
+
+    <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-gov-blue/5 rounded-full blur-[120px] -z-10"></div>
+    <div class="absolute bottom-[10%] right-[-5%] w-[400px] h-[400px] bg-gov-saffron/10 rounded-full blur-[100px] -z-10"></div>
+
+    <%- include('../partials/nav') %>
+
+    <main style="max-width: 860px; margin: 0 auto; padding: 8rem 1.5rem 4rem;">
+
+        <!-- HEADER -->
+        <a href="/profile" style="display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: #94a3b8; text-decoration: none; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 2rem;">
+            ← Back to Dashboard
+        </a>
+
+        <div style="margin-bottom: 2.5rem;">
+            <span style="display: inline-block; padding: 5px 14px; background: rgba(0,51,102,0.08); color: #003366; border: 1px solid rgba(0,51,102,0.15); border-radius: 999px; font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem;">
+                New Grievance
+            </span>
+            <h1 style="font-size: 2.5rem; font-weight: 900; letter-spacing: -0.03em; color: #0f172a; line-height: 1.1; margin-bottom: 0.5rem;">
+                File a Grievance.
+            </h1>
+            <p style="font-size: 0.9rem; color: #64748b;">
+                All fields marked <span style="color: #dc2626;">*</span> are mandatory. Your grievance will be assigned a unique ID upon submission.
+            </p>
+        </div>
+
+        <% if (typeof error !== 'undefined' && error) { %>
+            <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 0.75rem; padding: 0.875rem 1rem; margin-bottom: 1.5rem;">
+                <p style="font-size: 13px; color: #dc2626; font-weight: 600;"><%= error %></p>
+            </div>
+        <% } %>
+
+        <form action="/grievance/new" method="POST">
+
+            <!-- SECTION 1: Classification -->
+            <div style="background: white; border-radius: 1.25rem; border: 1px solid #e2e8f0; padding: 2rem; margin-bottom: 1.25rem;">
+                <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid #f1f5f9;">
+                    <div style="width: 28px; height: 28px; border-radius: 50%; background: #003366; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0;">1</div>
+                    <div>
+                        <p style="font-size: 0.85rem; font-weight: 900; color: #0f172a; letter-spacing: -0.01em;">Classification</p>
+                        <p style="font-size: 11px; color: #94a3b8;">Select the category and concerned department</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 1rem; margin-bottom: 1.25rem;">
+                    <div style="flex: 1;">
+                        <label style="display: block; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: #94a3b8; margin-bottom: 0.5rem;">
+                            Category <span style="color: #dc2626;">*</span>
+                        </label>
+                        <select name="category" required style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; font-size: 0.875rem; background: #f8fafc; font-family: inherit; color: #0f172a; cursor: pointer; outline: none;">
+                            <option value="" disabled selected>Select a category</option>
+                            <optgroup label="Civil Infrastructure">
+                                <option value="Roads & Highways">Roads & Highways</option>
+                                <option value="Bridges & Flyovers">Bridges & Flyovers</option>
+                                <option value="Public Buildings">Public Buildings</option>
+                                <option value="Drainage & Sewage">Drainage & Sewage</option>
+                            </optgroup>
+                            <optgroup label="Utilities">
+                                <option value="Water Supply">Water Supply</option>
+                                <option value="Electricity">Electricity</option>
+                                <option value="Street Lighting">Street Lighting</option>
+                                <option value="Gas Supply">Gas Supply</option>
+                            </optgroup>
+                            <optgroup label="Public Services">
+                                <option value="Sanitation & Waste">Sanitation & Waste</option>
+                                <option value="Public Safety">Public Safety</option>
+                                <option value="Healthcare">Healthcare</option>
+                                <option value="Education">Education</option>
+                                <option value="Transport & Traffic">Transport & Traffic</option>
+                                <option value="Public Distribution">Public Distribution</option>
+                            </optgroup>
+                            <optgroup label="Governance">
+                                <option value="Document & Certificate">Document & Certificate</option>
+                                <option value="Land & Property">Land & Property</option>
+                                <option value="Corruption">Corruption</option>
+                                <option value="Other">Other</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div style="flex: 1;">
+                        <label style="display: block; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: #94a3b8; margin-bottom: 0.5rem;">
+                            Department <span style="color: #dc2626;">*</span>
+                        </label>
+                        <select name="department" required style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; font-size: 0.875rem; background: #f8fafc; font-family: inherit; color: #0f172a; cursor: pointer; outline: none;">
+                            <option value="" disabled selected>Select a department</option>
+                            <optgroup label="Municipal">
+                                <option value="Municipal Corporation">Municipal Corporation</option>
+                                <option value="Public Works Department (PWD)">Public Works Department (PWD)</option>
+                                <option value="Urban Development Authority">Urban Development Authority</option>
+                            </optgroup>
+                            <optgroup label="Utilities">
+                                <option value="Water Supply Board">Water Supply Board</option>
+                                <option value="DISCOM / Power Department">DISCOM / Power Department</option>
+                                <option value="Gas Authority">Gas Authority</option>
+                            </optgroup>
+                            <optgroup label="Law & Order">
+                                <option value="Police Department">Police Department</option>
+                                <option value="Home Department">Home Department</option>
+                                <option value="Vigilance / Anti-Corruption">Vigilance / Anti-Corruption</option>
+                            </optgroup>
+                            <optgroup label="Social Services">
+                                <option value="Health Department">Health Department</option>
+                                <option value="Education Department">Education Department</option>
+                                <option value="Social Welfare Department">Social Welfare Department</option>
+                                <option value="Food & Civil Supplies">Food & Civil Supplies</option>
+                            </optgroup>
+                            <optgroup label="Revenue & Land">
+                                <option value="Revenue Department">Revenue Department</option>
+                                <option value="Land Records Department">Land Records Department</option>
+                                <option value="Registration Department">Registration Department</option>
+                            </optgroup>
+                            <optgroup label="Transport">
+                                <option value="Transport Department">Transport Department</option>
+                                <option value="Road Transport Corporation">Road Transport Corporation</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label style="display: block; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: #94a3b8; margin-bottom: 0.5rem;">
+                        Grievance Title <span style="color: #dc2626;">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        name="title"
+                        placeholder="e.g. No water supply for 3 days in Sector 14"
+                        required
+                        maxlength="120"
+                        style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; font-size: 0.875rem; background: #f8fafc; font-family: inherit; color: #0f172a; outline: none; box-sizing: border-box;"
+                    >
+                </div>
+            </div>
+
+            <!-- SECTION 2: Location -->
+            <div style="background: white; border-radius: 1.25rem; border: 1px solid #e2e8f0; padding: 2rem; margin-bottom: 1.25rem;">
+                <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid #f1f5f9;">
+                    <div style="width: 28px; height: 28px; border-radius: 50%; background: #003366; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0;">2</div>
+                    <div>
+                        <p style="font-size: 0.85rem; font-weight: 900; color: #0f172a; letter-spacing: -0.01em;">Location Details</p>
+                        <p style="font-size: 11px; color: #94a3b8;">Where is the issue located?</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 1rem; margin-bottom: 1.25rem;">
+                    <div style="flex: 1;">
+                        <label style="display: block; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: #94a3b8; margin-bottom: 0.5rem;">State <span style="color: #dc2626;">*</span></label>
+                        <select name="state" required style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; font-size: 0.875rem; background: #f8fafc; font-family: inherit; color: #0f172a; cursor: pointer; outline: none;">
+                            <option value="" disabled selected>Select state</option>
+                            <option>Andhra Pradesh</option>
+                            <option>Arunachal Pradesh</option>
+                            <option>Assam</option>
+                            <option>Bihar</option>
+                            <option>Chhattisgarh</option>
+                            <option>Goa</option>
+                            <option>Gujarat</option>
+                            <option>Haryana</option>
+                            <option>Himachal Pradesh</option>
+                            <option>Jharkhand</option>
+                            <option>Karnataka</option>
+                            <option>Kerala</option>
+                            <option>Madhya Pradesh</option>
+                            <option>Maharashtra</option>
+                            <option>Manipur</option>
+                            <option>Meghalaya</option>
+                            <option>Mizoram</option>
+                            <option>Nagaland</option>
+                            <option>Odisha</option>
+                            <option>Punjab</option>
+                            <option>Rajasthan</option>
+                            <option>Sikkim</option>
+                            <option>Tamil Nadu</option>
+                            <option>Telangana</option>
+                            <option>Tripura</option>
+                            <option>Uttar Pradesh</option>
+                            <option>Uttarakhand</option>
+                            <option>West Bengal</option>
+                            <option>Delhi</option>
+                            <option>Jammu & Kashmir</option>
+                            <option>Ladakh</option>
+                            <option>Puducherry</option>
+                            <option>Chandigarh</option>
+                        </select>
+                    </div>
+                    <div style="flex: 1;">
+                        <label style="display: block; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: #94a3b8; margin-bottom: 0.5rem;">District <span style="color: #dc2626;">*</span></label>
+                        <input type="text" name="district" placeholder="e.g. Ludhiana" required style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; font-size: 0.875rem; background: #f8fafc; font-family: inherit; color: #0f172a; outline: none; box-sizing: border-box;">
+                    </div>
+                </div>
+
+                <div>
+                    <label style="display: block; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: #94a3b8; margin-bottom: 0.5rem;">
+                        Full Address / Landmark
+                    </label>
+                    <input type="text" name="location" placeholder="e.g. Near Bus Stand, Ward 12, Sector 4" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; font-size: 0.875rem; background: #f8fafc; font-family: inherit; color: #0f172a; outline: none; box-sizing: border-box;">
+                </div>
+            </div>
+
+            <!-- SECTION 3: Description -->
+            <div style="background: white; border-radius: 1.25rem; border: 1px solid #e2e8f0; padding: 2rem; margin-bottom: 1.25rem;">
+                <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid #f1f5f9;">
+                    <div style="width: 28px; height: 28px; border-radius: 50%; background: #003366; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0;">3</div>
+                    <div>
+                        <p style="font-size: 0.85rem; font-weight: 900; color: #0f172a; letter-spacing: -0.01em;">Grievance Description</p>
+                        <p style="font-size: 11px; color: #94a3b8;">Describe the issue clearly and in detail</p>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 1.25rem;">
+                    <label style="display: block; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: #94a3b8; margin-bottom: 0.5rem;">
+                        Description <span style="color: #dc2626;">*</span>
+                    </label>
+                    <textarea
+                        name="description"
+                        required
+                        rows="6"
+                        placeholder="Describe the problem in detail — when did it start, how does it affect you or the community, have you raised this before, any relevant details..."
+                        style="width: 100%; padding: 0.875rem 1rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; font-size: 0.875rem; background: #f8fafc; font-family: inherit; color: #0f172a; outline: none; resize: vertical; line-height: 1.7; box-sizing: border-box;"
+                    ></textarea>
+                </div>
+
+                <div style="display: flex; gap: 1rem;">
+                    <div style="flex: 1;">
+                        <label style="display: block; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: #94a3b8; margin-bottom: 0.5rem;">
+                            Issue Started On
+                        </label>
+                        <input type="date" name="issueDate" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; font-size: 0.875rem; background: #f8fafc; font-family: inherit; color: #0f172a; outline: none; box-sizing: border-box;">
+                    </div>
+                    <div style="flex: 1;">
+                        <label style="display: block; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: #94a3b8; margin-bottom: 0.5rem;">
+                            Priority
+                        </label>
+                        <select name="priority" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; font-size: 0.875rem; background: #f8fafc; font-family: inherit; color: #0f172a; cursor: pointer; outline: none;">
+                            <option value="normal">Normal</option>
+                            <option value="urgent">Urgent</option>
+                            <option value="critical">Critical</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 4: Declaration -->
+            <div style="background: white; border-radius: 1.25rem; border: 1px solid #e2e8f0; padding: 2rem; margin-bottom: 1.5rem;">
+                <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid #f1f5f9;">
+                    <div style="width: 28px; height: 28px; border-radius: 50%; background: #003366; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0;">4</div>
+                    <div>
+                        <p style="font-size: 0.85rem; font-weight: 900; color: #0f172a; letter-spacing: -0.01em;">Declaration</p>
+                        <p style="font-size: 11px; color: #94a3b8;">Please confirm before submitting</p>
+                    </div>
+                </div>
+
+                <div style="background: #f8fafc; border-radius: 0.75rem; padding: 1rem 1.25rem; margin-bottom: 1rem;">
+                    <label style="display: flex; align-items: flex-start; gap: 0.75rem; cursor: pointer;">
+                        <input type="checkbox" name="declaration" required style="margin-top: 2px; flex-shrink: 0; accent-color: #003366;">
+                        <span style="font-size: 0.8rem; color: #475569; line-height: 1.6;">
+                            I hereby declare that the information provided above is true and correct to the best of my knowledge. I understand that filing a false grievance is an offence and may lead to legal action.
+                        </span>
+                    </label>
+                </div>
+
+                <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 0.75rem; padding: 0.875rem 1rem;">
+                    <p style="font-size: 12px; color: #15803d; font-weight: 600; line-height: 1.6;">
+                        Your grievance will be assigned a unique ID and routed to the Nodal Officer of the concerned department within 24 hours. You can track its status from your dashboard.
+                    </p>
+                </div>
+            </div>
+
+            <!-- SUBMIT -->
+            <div style="display: flex; gap: 1rem;">
+                <a href="/profile" style="flex: 1; padding: 1rem; text-align: center; border: 1px solid #e2e8f0; border-radius: 0.875rem; font-weight: 700; font-size: 0.85rem; color: #94a3b8; text-decoration: none; background: white;">
+                    Cancel
+                </a>
+                <button type="submit" style="flex: 3; padding: 1rem; background: #003366; color: white; border-radius: 0.875rem; font-weight: 700; font-size: 0.85rem; border: none; cursor: pointer; font-family: inherit; letter-spacing: 0.03em;">
+                    Submit Grievance →
+                </button>
+            </div>
+
+        </form>
+    </main>
+</body>
+</html>
